@@ -1,0 +1,14 @@
+name: Test Workflow on Feature Branch
+
+on:
+  push:
+    branches:
+      - session-4-updates
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: echo "Running tests..."
