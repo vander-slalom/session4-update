@@ -56,9 +56,9 @@ jobs:
         with:
           template-file: exercise-toolkit/markdown-templates/step-feedback/step-mistake.md
           template-vars: |
-            feedback_message="Please use Copilot to implement an issue that affects files in the `src` folder."
+            feedback_message="Please use Copilot to implement an issue that affects files in the `src` folder, or add tests in the `tests` folder."
 
-      - name: Check for changes in src folder
+      - name: Check for changes in src or tests folder
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -68,18 +68,18 @@ jobs:
           echo "All changed files: ${ALL_CHANGED_FILES}"
 
           # Initialize flag
-          has_src_changed=false
+          has_valid_changes=false
 
           # Check each changed file
           for file in ${ALL_CHANGED_FILES}; do
-            if [[ $file == src/* ]]; then
-              has_src_changed=true
+            if [[ $file == src/* || $file == tests/* || $file == .github/workflows/* ]]; then
+              has_valid_changes=true
               break
             fi
           done
 
-          # If no src changes found, comment and exit
-          if ! $has_src_changed; then
+          # If no valid changes found, comment and exit
+          if ! $has_valid_changes; then
             gh issue comment "$ISSUE_URL" \
               --body "$COMMENT_BODY" \
               --edit-last
