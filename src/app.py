@@ -111,8 +111,16 @@ def root():
 
 
 @app.get("/capabilities")
-def get_capabilities():
-    return capabilities
+def get_capabilities(practice_area: str | None = None):
+    if practice_area is None:
+        return capabilities
+
+    normalized_practice_area = practice_area.strip().lower()
+    return {
+        capability_name: capability_details
+        for capability_name, capability_details in capabilities.items()
+        if capability_details["practice_area"].lower() == normalized_practice_area
+    }
 
 
 @app.post("/capabilities/{capability_name}/register")
