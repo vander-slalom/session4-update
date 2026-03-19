@@ -59,6 +59,16 @@ Now, let's use our MCP server's tools and Copilot to do a bit of triage and get 
 
 1. Once the pull request is created, Byte will start checking your work. Give them a moment and keep watch of the comments. You will see Byte respond with progress info and the next step!
 
+### 🧪 Bonus Activity: Quality Engineering (QE) Path
+
+If you are a QE or interested in test automation, you can choose to focus on the testing infrastructure instead!
+
+1.  **Explore the Tests**: Ask Copilot to explain the current test setup in the `tests/` folder.
+2.  **Fix the Failing Test**: There is a placeholder failing test in `tests/test_capabilities.py`. Ask Copilot to help you implement the missing feature (filtering) OR update the test to match the current behavior.
+3.  **Add New Tests**: Ask Copilot to generate new integration tests for the API endpoints.
+
+> **Note:** If you modify any files in the `tests/` folder, Byte (the lab bot) will detect your QE work and run a special validation check on your Pull Request!
+
 <details>
 <summary>Having trouble?</summary><br/>
 
