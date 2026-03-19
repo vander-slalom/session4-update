@@ -61,7 +61,7 @@ Now, let's use our MCP server's tools and Copilot to do a bit of triage and get 
 
 ### 🧪 Bonus Activity: Quality Engineering (QE) Path
 
-If you are a QE or interested in test automation, you can choose to focus on the testing infrastructure instead!
+In addition to implementing the feature, you can also explore the Quality Engineering path:
 
 1.  **Explore the Tests**: Ask Copilot to explain the current test setup in the `tests/` folder.
 2.  **Fix the Failing Test**: There is a placeholder failing test in `tests/test_capabilities.py`. Ask Copilot to help you implement the missing feature (filtering) OR update the test to match the current behavior.
