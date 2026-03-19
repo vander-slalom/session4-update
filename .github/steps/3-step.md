@@ -67,6 +67,16 @@ In addition to implementing the feature, you can also explore the Quality Engine
 2.  **Fix the Failing Test**: There is a placeholder failing test in `tests/test_capabilities.py`. Ask Copilot to help you implement the missing feature (filtering) OR update the test to match the current behavior.
 3.  **Add New Tests**: Ask Copilot to generate new integration tests for the API endpoints.
 
+> ![Static Badge](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
+>
+> ```prompt
+> @workspace I want to work on the Quality Engineering track.
+> Please analyze the current tests in tests/ and help me:
+> 1. Understand why test_capability_filter_implementation is failing
+> 2. Create a plan to fix the implementation in src/app.py
+> 3. Add a new test case for the /capabilities endpoint
+> ```
+
 > **Note:** If you modify any files in the `tests/` folder, Byte (the lab bot) will detect your QE work and run a special validation check on your Pull Request!
 
 <details>

@@ -118,7 +118,11 @@ jobs:
           gh issue comment "$ISSUE_URL" \
             --body "### 🧪 QE Activity Detected!
             
-            I see you've updated tests or workflows. Here is a snapshot of the test execution results:
+            **I've reviewed your Quality Engineering work.**
+            
+            Because you modified files in \`tests/\` or \`.github/workflows/\`, I automatically ran the project's test suite to validate your changes.
+            
+            Here is a snapshot of the execution results:
             
             \`\`\`
             $TEST_OUTPUT
