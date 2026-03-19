@@ -36,7 +36,7 @@ A FastAPI application that enables Slalom consultants to register their capabili
 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
-| GET    | `/capabilities`                                                   | Get all capabilities with details and current consultant assignments |
+| GET    | `/capabilities?practice_area=Strategy`                           | Get all capabilities, optionally filtered by practice area            |
 | POST   | `/capabilities/{capability_name}/register?email=consultant@slalom.com` | Register consultant for a capability                     |
 | DELETE | `/capabilities/{capability_name}/unregister?email=consultant@slalom.com` | Unregister consultant from a capability              |
 
