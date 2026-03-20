@@ -8,6 +8,7 @@ capabilities and manage consulting expertise across the organization.
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from typing import Optional
 import os
 from pathlib import Path
 
@@ -111,8 +112,14 @@ def root():
 
 
 @app.get("/capabilities")
-def get_capabilities():
-    return capabilities
+def get_capabilities(practice_area: Optional[str] = None):
+    if practice_area is None:
+        return capabilities
+    return {
+        name: details
+        for name, details in capabilities.items()
+        if details.get("practice_area") == practice_area
+    }
 
 
 @app.post("/capabilities/{capability_name}/register")

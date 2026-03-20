@@ -17,19 +17,52 @@ def test_read_capabilities():
 
 def test_capability_filter_implementation():
     """
-    FAILING TEST: This test is a placeholder to demonstrate a missing feature.
-    
-    The current API does not support filtering by 'practice_area'.
-    This test expects a filtered list but will receive the full list (or fail differently).
-    
-    QE/Dev Task: Implement the filtering logic in app.py or update this test to match actual requirements.
+    Test that the /capabilities endpoint supports filtering by practice_area.
+    Only capabilities matching the requested practice_area should be returned.
     """
     response = client.get("/capabilities?practice_area=Strategy")
     assert response.status_code == 200
-    
+
     data = response.json()
-    
-    # This assertion will fail because the API ignores the query param and returns everything
-    # We expect ONLY 'Strategy' items (e.g., "Digital Strategy")
+
+    # Verify at least one result is returned for a known practice area
+    assert len(data) > 0, "Expected at least one Strategy capability"
+
+    # Every returned capability must match the requested practice_area
     for name, details in data.items():
         assert details["practice_area"] == "Strategy", f"Found non-Strategy capability: {name}"
+
+def test_capabilities_endpoint_structure():
+    """
+    Test that every capability returned by GET /capabilities contains all
+    required fields with the correct types.
+    """
+    response = client.get("/capabilities")
+    assert response.status_code == 200
+    data = response.json()
+
+    required_fields = [
+        "description",
+        "practice_area",
+        "skill_levels",
+        "certifications",
+        "industry_verticals",
+        "capacity",
+        "consultants",
+    ]
+
+    for name, details in data.items():
+        for field in required_fields:
+            assert field in details, f"Capability '{name}' is missing required field '{field}'"
+        assert isinstance(details["skill_levels"], list), (
+            f"skill_levels for '{name}' should be a list"
+        )
+        assert isinstance(details["consultants"], list), (
+            f"consultants for '{name}' should be a list"
+        )
+        assert isinstance(details["capacity"], int), (
+            f"capacity for '{name}' should be an int"
+        )
+        assert details["practice_area"] in ("Technology", "Strategy", "Operations"), (
+            f"Unexpected practice_area '{details['practice_area']}' for capability '{name}'"
+        )
