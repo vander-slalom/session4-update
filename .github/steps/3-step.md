@@ -70,11 +70,10 @@ In addition to implementing the feature, you can also explore the Quality Engine
 > ![Static Badge](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
 >
 > ```prompt
-> @workspace I want to work on the Quality Engineering track.
-> Please analyze the current tests in tests/ and help me:
-> 1. Understand why test_capability_filter_implementation is failing
-> 2. Create a plan to fix the implementation in src/app.py
-> 3. Add a new test case for the /capabilities endpoint
+> @workspace I want to work on the Quality Engineering track. 
+> Please help me update the test automation:
+> 1. Fix the failing test `test_capability_filter_implementation` in `tests/test_capabilities.py` by implementing the logic in `src/app.py`.
+> 2. Add a new test case to `tests/test_capabilities.py` that verifies the `/capabilities` endpoint.
 > ```
 
 > **Note:** If you modify any files in the `tests/` folder, Byte (the lab bot) will detect your QE work and run a special validation check on your Pull Request!

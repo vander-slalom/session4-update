@@ -109,6 +109,22 @@ jobs:
           pytest tests/ > test_results.txt 2>&1 || true
           cat test_results.txt
 
+      - name: Build message - step finished
+        id: build-message-step-finish
+        uses: skills/action-text-variables@v1
+        with:
+          template-file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
+          template-vars: |
+            next_step_number=4
+
+      - name: Update comment - step finished
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body "${{ steps.build-message-step-finish.outputs.updated-text }}" \
+            --edit-last
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: QE Validation - Post Results
         if: steps.check-tests.outputs.has_test_changes == 'true'
         env:
@@ -130,22 +146,6 @@ jobs:
             \`\`\`
             
             *Note: Whether tests passed or failed, your workshop progress continues! Great job exploring the QE path.*"
-
-      - name: Build message - step finished
-        id: build-message-step-finish
-        uses: skills/action-text-variables@v1
-        with:
-          template-file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
-          template-vars: |
-            next_step_number=4
-
-      - name: Update comment - step finished
-        run: |
-          gh issue comment "$ISSUE_URL" \
-            --body "${{ steps.build-message-step-finish.outputs.updated-text }}" \
-            --edit-last
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   post_next_step_content:
     name: Post next step content
